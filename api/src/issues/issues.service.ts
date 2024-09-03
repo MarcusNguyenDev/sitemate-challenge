@@ -1,26 +1,45 @@
 import { Injectable } from '@nestjs/common';
 import { CreateIssueDto } from './dto/create-issue.dto';
 import { UpdateIssueDto } from './dto/update-issue.dto';
+import data from './entities/hardcode-data.entity';
+import {NotFoundException} from "@nestjs/common";
 
 @Injectable()
 export class IssuesService {
   create(createIssueDto: CreateIssueDto) {
-    return 'This action adds a new issue';
+    console.log(createIssueDto)
+    return createIssueDto;
   }
 
   findAll() {
-    return `This action returns all issues`;
+    return data;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} issue`;
+    const result= data.find(value => value.id === id);
+    if(!result){
+      throw new NotFoundException(`Issue with id ${id} not found`);
+    }
+    return result;
   }
 
   update(id: number, updateIssueDto: UpdateIssueDto) {
-    return `This action updates a #${id} issue`;
+    const dataToUpdate = data.find(value => value.id === id);
+
+    if(!dataToUpdate){
+      throw new NotFoundException(`Issue with id ${id} not found`);
+    }
+
+    Object.assign(dataToUpdate, updateIssueDto);
+    return dataToUpdate;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} issue`;
+    const index = data.findIndex(value => value.id === id);
+    if(index === -1){
+      throw new NotFoundException(`Issue with id ${id} not found`);
+    }
+    data.splice(index, 1);
+    return `Issue with id ${id} removed successfully`;
   }
 }
