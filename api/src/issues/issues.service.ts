@@ -32,6 +32,7 @@ export class IssuesService {
     }
 
     Object.assign(dataToUpdate, updateIssueDto);
+    console.log(dataToUpdate);
     return dataToUpdate;
   }
 
@@ -41,6 +42,7 @@ export class IssuesService {
       throw new NotFoundException(`Issue with id ${id} not found`);
     }
     data.splice(index, 1);
+    console.log(index);
     return `Issue with id ${id} removed successfully`;
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import CreateModal from "./create-modal";
+import DeleteModal from "@/components/Issue-Card/delete-modal";
 import { useState } from "react";
 
 function Card({

@@ -15,7 +15,7 @@ interface IssueItemProps {
   description: string;
 }
 
-export default function UpdateModal({
+export default function DeleteModal({
   open,
   setOpen,
   issue,
@@ -42,7 +42,7 @@ export default function UpdateModal({
             <form
               onSubmit={() => {
                 fetch("http://localhost:3001/issues/" + issue.id, {
-                  method: "PUT",
+                  method: "DELETE",
                   headers: {
                     "Content-Type": "application/json",
                   },
